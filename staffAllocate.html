@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Allocate</title>
+</head>
+<body>
+    <h2>Staff Allocation</h2>
+    <form action="allocateStaff.php" method="POST">
+        <label for="billno">Bill Number: </label>
+        <input type="text" name="billno" id="billno" required><br><br>
+
+        <label for="staffname">Staff Name: </label>
+        <input type="text" name="staffname" id="staffname" required><br><br>
+
+        <label for="department">Department: </label><br>
+        <input type="radio" name="department" id="cutter" value="cutter">
+        <label for="cutter">Cutter</label><br>
+        <input type="radio" name="department" id="sewer" value="sewer">
+        <label for="sewer">Sewer</label><br>
+        <input type="radio" name="department" id="beader" value="beader">
+        <label for="beader">Beader</label><br>
+        <input type="radio" name="department" id="embpatch" value="embpatch">
+        <label for="embpatch">Emboider/Patching</label><br>
+        <br>
+        <input type="submit" name="submit" value="Send Order">
+        
+    </form>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cash flow login</title>
+</head>
+<body>
+    <h2>Restricted page please input password</h2>
+    <form onsubmit="onSubmitHandler(event)">
+    <label for="password">Remove Order Password: </label>
+    <input type="password" name="pass" id="pass" placeholder="input remove order password">
+    <input type="submit">
+    </form>
+
+    <script>
+        function onSubmitHandler(event){
+            event.preventDefault();
+
+            let password = document.getElementById('pass').value;
+
+            if(password==="btcmay"){
+                alert("Access granted");
+                window.location.replace("removeOrderFinal.html");
+            }
+            else{
+                alert('Wrong password please try again');
+            }
+        }
+    </script>
+</body>
+</html>
