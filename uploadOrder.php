@@ -27,19 +27,18 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-	$sql = "INSERT INTO masterfile2023 (billno, dateordered, collectiondate, memberno, fullamount, deposit, balance, payment, simple, emboidery, manik, patching, diamond, tudung, repair, qty, cutter, sewer, beader, embpatch, status) VALUES ('$billno', '$dateordered', '$collectiondate', '$memberno', '$fullamount', '$deposit', '$balance', '$payment', '$simple', '$emboidery', '$manik', '$patching', '$diamond', '$tudung', '$repair', '$qty', '', '', '', '', '$status')";
+	$sql = "INSERT INTO masterfile2023 (billno, dateordered, collectiondate, memberno, fullamount, deposit, balance, simple, emboidery, manik, patching, diamond, tudung, repair, qty, cutter, sewer, beader, embpatch, status) VALUES ('$billno', '$dateordered', '$collectiondate', '$memberno', '$fullamount', '$deposit', '$balance', '$simple', '$emboidery', '$manik', '$patching', '$diamond', '$tudung', '$repair', '$qty', '', '', '', '', '$status');";
+	$sql .= "INSERT INTO depositTable (billno, deposit, paymentType) VALUES ('$billno', '$deposit', '$payment') ";
 
-	if (mysqli_query($conn, $sql)) {
-		echo "<h3>".$billno." ".$dateordered." ".$collectiondate." ".$memberno." ".$fullamount." ".$deposit." ".$balance." ".$payment." ".$simple." ".$emboidery." ".$manik." ".$patching." ".$diamond." ".$tudung." ".$repair." ".$qty." ".$status."</h3>";
+	if (mysqli_multi_query($conn, $sql)){
+		echo "<h3>".$billno." ".$dateordered." ".$collectiondate." ".$memberno." ".$fullamount." ".$deposit." ".$balance." ".$simple." ".$emboidery." ".$manik." ".$patching." ".$diamond." ".$tudung." ".$repair." ".$qty." ".$status."</h3>";
 		echo "<br><br>";
 		echo "New Order updated";
-        echo "<br><br>";
-        echo "<button><a href='index.html'>Back to main page</a></button>";
-	} else {
-		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+		echo "<br><br>";
+	
+		echo "<button><a href='index.html'>Back to main page</a></button>";
 	}
-
-	// close the database connection
+// close the database connection
 	mysqli_close($conn);
 }
 ?>
