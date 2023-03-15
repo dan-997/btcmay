@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-    $sql = "select billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE memberno = $memberno";
+    $sql = "SELECT billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE memberno = $memberno";
     $counter = "select count(*) AS total FROM masterfile2023 WHERE memberno = $memberno";
 
     $result = $conn->query($sql);

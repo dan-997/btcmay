@@ -7,6 +7,22 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Order Status</h1>
+    <form action="orderStatus.php" method="POST">
+        <label for="billno">Bill Number: </label>
+        <input type="text" name="billno" id="billno" required><br><br>
+
+        <label for="status">Order Status: </label><br>
+        <input type="radio" name="order" id="completed" value="completed">
+        <label for="online">Completed</label><br>
+        <input type="radio" name="order" id="taken" value="taken">
+        <label for="card">Taken</label><br>
+        <input type="radio" name="order" id="pending" value="pending">
+        <label for="cash">Pending</label><br><br>
     
+
+        <input type="submit" name="submit" value="Send Order">
+        
+    </form>
 </body>
 </html>

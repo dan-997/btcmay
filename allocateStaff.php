@@ -11,8 +11,6 @@ if (isset($_POST['submit'])) {
 	if (!$conn) {
 		die("Connection failed: " . mysqli_connect_error());
 	}
-    
-    
 
 	// insert data into the database
 	$sql = "UPDATE masterfile2023 SET $department = '$staffname' WHERE billno = $billno";

@@ -4,9 +4,12 @@
 </head>
 </html>
 
+
 <?php
 if (isset($_POST['submit'])) {
-	$phoneno = $_POST['phoneno'];
+	$staffname = $_POST['staffname'];
+	$month = $_POST['month'];
+    $year = $_POST['year'];
 
 	// connect to the database
 	$conn = mysqli_connect("localhost", "root","", "btcmay");
@@ -17,20 +20,10 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-    $sql = "select m.billno,m.dateordered,m.collectiondate,m.memberno,m.fullamount,m.deposit,m.balance,m.simple,m.emboidery,m.manik,m.patching,m.diamond,m.tudung,m.repair,m.qty,m.cutter,m.sewer,m.beader,m.embpatch,m.status FROM masterfile2023 m JOIN Customer c ON m.memberno = c.memberno WHERE c.memberphone = $phoneno";
-    $counter = "select count(*) AS total FROM masterfile2023 m JOIN Customer c ON m.memberno = c.memberno WHERE c.memberphone = $phoneno";
+    $sql = "SELECT billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE embpatch = '$staffname' OR cutter = '$staffname' OR beader = '$staffname'";
+	$result = $conn->query($sql);
 
-    $result = $conn->query($sql);
-    $result2 = $conn->query($counter);
-
-    if ($result2->num_rows > 0) {
-      while($row = $result2->fetch_assoc()) {
-        echo "<h1>".$row["total"]." number of items </h1>";
-      }
-    }
-  
-
-	if ($result->num_rows > 0) {
+    if ($result->num_rows > 0) {
         echo "<table id='customers'><tr><th>Bill No</th><th>Date Ordered</th><th>Collection Date</th><th>Member No</th><th>Full Amount</th><th>Deposit</th><th>Balance</th><th>Simple</th><th>Emboidery</th><th>Manik</th><th>Patching</th><th>Diamond</th><th>Tudung</th><th>Repair</th><th>Quantity</th><th>Cutter</th><th>Sewer</th><th>Beader</th><th>Embpatch</th><th>Status</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
@@ -40,8 +33,10 @@ if (isset($_POST['submit'])) {
       } else {
         echo "0 results";
       }
-    echo "<br><button><a href='index.html'>Back to main page</a></button>";
-	// close the database connection
+
+      echo "<button><a href='index.html'>Back to main page</a></button>";
+
+// close the database connection
 	mysqli_close($conn);
 }
 ?>
