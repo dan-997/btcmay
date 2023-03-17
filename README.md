@@ -1,6 +1,7 @@
 # btcmay
 
-Created for the purpose of digitizating local tailoring business 
+Very Basic unrefined data storing webapp.
+Created for the purpose of digitizating local tailoring business.
 
 
 Checklist before pull request:
