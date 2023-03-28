@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	// extract data from the database
-    $sql = "select billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,payment,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE billno = $billno ORDER BY status";
+    $sql = "select billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE billno = $billno ORDER BY status";
     $counter = "select count(*) AS total FROM masterfile2023 WHERE billno = $billno";
     $result = $conn->query($sql);
     $result2 = $conn->query($counter);

@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./style.css" type="text/css">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cash Deposit</title>
+    <title>Order Quantity Update</title>
 </head>
 <body>
-    <h1>Cash Deposit</h1>
-    <form action="checkDeposit.php" method="POST">
+    <h1>Update Quantity Order Complete</h1>
+    <form action="orderQty.php" method="POST">
         <label for="billno">Bill Number: </label>
         <input type="text" name="billno" id="billno" required><br><br>
 
-        <input type="submit" name="submit" value="Check Deposit">
+        <label for="depoval">Value Completed: </label>
+        <input type="text" name="valcomp" id="valcomp" required><br><br>
+
+        <input type="submit" name="submit" value="Send Order">
         
     </form>
 </body>

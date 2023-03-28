@@ -20,6 +20,20 @@ if (isset($_POST['submit'])) {
 	
 		echo "<button><a href='index.html'>Back to main page</a></button>";
 	}
+
+	$balancecheck = "SELECT balance FROM masterfile2023 WHERE billno ='$billno'";
+
+	$result2 = $conn->query($balancecheck);
+
+    if ($result2->num_rows > 0 && $status == "taken" ) {
+      while($row = $result2->fetch_assoc()) {
+		if($row["balance"] > 0){
+        echo "<p>".$row["balance"]." balance left please complete payment.</p>";
+		echo "<a href='/btcmay/cashDeposit.html'><button> Click here to make payment </button></a>";
+      }
+	}
+    }
+
 // close the database connection
 	mysqli_close($conn);
 }

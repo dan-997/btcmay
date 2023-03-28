@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
 
 	// connect to the database
 	$conn = mysqli_connect("localhost", "root","", "btcmay");
-
+	
 	// check connection
 	if (!$conn) {
 		die("Connection failed: " . mysqli_connect_error());

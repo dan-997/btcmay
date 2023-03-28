@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 if (isset($_POST['submit'])) {
 	$billno = $_POST['billno'];
 	$dateordered = $_POST['dateordered'];
@@ -16,7 +19,10 @@ if (isset($_POST['submit'])) {
     $tudung = $_POST['tudung'];
     $repair = $_POST['repair'];
     $qty = $simple + $emboidery + $manik + $patching + $diamond;
-    $status = 'pending';
+	$done = 0;
+	$qtybalance = $qty - $done;
+    $status = 'process';
+	$current_date = date('Y-m-d');
 
 	// connect to the database
 	$conn = mysqli_connect("localhost", "root","", "btcmay");
@@ -27,15 +33,15 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-	$sql = "INSERT INTO masterfile2023 (billno, dateordered, collectiondate, memberno, fullamount, deposit, balance, simple, emboidery, manik, patching, diamond, tudung, repair, qty, cutter, sewer, beader, embpatch, status) VALUES ('$billno', '$dateordered', '$collectiondate', '$memberno', '$fullamount', '$deposit', '$balance', '$simple', '$emboidery', '$manik', '$patching', '$diamond', '$tudung', '$repair', '$qty', '', '', '', '', '$status');";
-	$sql .= "INSERT INTO depositTable (billno, deposit, paymentType) VALUES ('$billno', '$deposit', '$payment') ";
+	$sql = "INSERT INTO masterfile2023 (billno, dateordered, collectiondate, memberno, fullamount, deposit, balance, simple, emboidery, manik, patching, diamond, tudung, repair, qty, done, qtybalance, cutter, sewer, beader, embpatch, status) VALUES ('$billno', '$dateordered', '$collectiondate', '$memberno', '$fullamount', '$deposit', '$balance', '$simple', '$emboidery', '$manik', '$patching', '$diamond', '$tudung', '$repair', '$qty', '$done','$qtybalance', '', '', '', '', '$status');";
+	$sql .= "INSERT INTO depositTable (billno, deposit, paymentType, dateEntered) VALUES ('$billno', '$deposit', '$payment','$current_date') ";
 
 	if (mysqli_multi_query($conn, $sql)){
 		echo "<h3>".$billno." ".$dateordered." ".$collectiondate." ".$memberno." ".$fullamount." ".$deposit." ".$balance." ".$simple." ".$emboidery." ".$manik." ".$patching." ".$diamond." ".$tudung." ".$repair." ".$qty." ".$status."</h3>";
 		echo "<br><br>";
 		echo "New Order updated";
 		echo "<br><br>";
-	
+		echo "$current_date";
 		echo "<button><a href='index.html'>Back to main page</a></button>";
 	}
 // close the database connection

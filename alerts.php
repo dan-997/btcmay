@@ -1,7 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="./style.css" type="text/css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
 <?php
-	$today = date("Y-m-d");
-	$end = $_POST['endOrderDate'];
-  //test update git 
+
+	$current_date = '2023-05-01';
 
 	// connect to the database
 	$conn = mysqli_connect("localhost", "root","", "btcmay");
@@ -11,55 +20,67 @@
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	// show all result for patching (3 days) into the database
-    $sql = "select billno,dateordered,collectiondate,memberno,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE collectiondate = dateadd(day,3,convert(datetime,$today)";
+	// show all result for simple (3 days) into the database
+    $sql = "SELECT billno,collectiondate,simple,qtybalance
+    FROM masterfile2023
+    WHERE collectiondate BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND DATE_ADD(CURDATE(), INTERVAL 1 DAY)
+    AND status like 'process' AND simple > 0 AND qtybalance > 0;";
 
-    $result = $conn->query($sql);
 
-	if ($result->num_rows > 0) {
-        echo "<table id='customers'><tr><th>Bill No</th><th>Date Ordered</th><th>Collection Date</th><th>Member No</th><th>Full Amount</th><th>Deposit</th><th>Balance</th><th>Payment Type</th><th>Simple</th><th>Emboidery</th><th>Manik</th><th>Patching</th><th>Diamond</th><th>Tudung</th><th>Repair</th><th>Quantity</th><th>Cutter</th><th>Sewer</th><th>Beader</th><th>Embpatch</th><th>Status</th></tr>";
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-          echo "<tr><td>".$row["billno"]."</td><td>".$row["dateordered"]."</td><td>".$row["collectiondate"]."</td><td>".$row["memberno"]."</td><td>".$row["fullamount"]."</td><td>".$row["deposit"]."</td><td>".$row["balance"]."</td><td>".$row["payment"]."</td><td>".$row["simple"]."</td><td>".$row["emboidery"]."</td><td>".$row["manik"]."</td><td>".$row["patching"]."</td><td>".$row["diamond"]."</td><td>".$row["tudung"]."</td><td>".$row["repair"]."</td><td>".$row["qty"]."</td><td>".$row["cutter"]."</td><td>".$row["sewer"]."</td><td>".$row["beader"]."</td><td>".$row["embpatch"]."</td><td>".$row["status"]."</td></tr>";
-        }
-        echo "</table>";
-      } else {
-        echo "0 results";
-      }
-  	// show all result for patching (3 days) into the database
-    $sql = "select billno,dateordered,collectiondate,memberno,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE collectiondate = dateadd(day,7,convert(datetime,$today)";
+$result = mysqli_query($conn,$sql);
 
-    $result = $conn->query($sql);
+echo "<h1>Simple (1 days)</h1>";
+if (mysqli_num_rows($result) > 0) {
+// Output data of each row
+while($row = mysqli_fetch_assoc($result)) {
+echo "<p>Simple Due: " . $row["billno"] . " | Collection Date: ". $row["collectiondate"]." | Simple : ".$row["simple"]." | Qty Balance : ".$row["qtybalance"]."</p>";
+}
+} else {
+echo "0 results";
+}
 
-	if ($result->num_rows > 0) {
-        echo "<table id='customers'><tr><th>Bill No</th><th>Date Ordered</th><th>Collection Date</th><th>Member No</th><th>Full Amount</th><th>Deposit</th><th>Balance</th><th>Payment Type</th><th>Simple</th><th>Emboidery</th><th>Manik</th><th>Patching</th><th>Diamond</th><th>Tudung</th><th>Repair</th><th>Quantity</th><th>Cutter</th><th>Sewer</th><th>Beader</th><th>Embpatch</th><th>Status</th></tr>";
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-          echo "<tr><td>".$row["billno"]."</td><td>".$row["dateordered"]."</td><td>".$row["collectiondate"]."</td><td>".$row["memberno"]."</td><td>".$row["fullamount"]."</td><td>".$row["deposit"]."</td><td>".$row["balance"]."</td><td>".$row["payment"]."</td><td>".$row["simple"]."</td><td>".$row["emboidery"]."</td><td>".$row["manik"]."</td><td>".$row["patching"]."</td><td>".$row["diamond"]."</td><td>".$row["tudung"]."</td><td>".$row["repair"]."</td><td>".$row["qty"]."</td><td>".$row["cutter"]."</td><td>".$row["sewer"]."</td><td>".$row["beader"]."</td><td>".$row["embpatch"]."</td><td>".$row["status"]."</td></tr>";
-        }
-        echo "</table>";
-      } else {
-        echo "0 results";
-      }
+		// show all result for patching (3 days) into the database
+    $sql2 = "SELECT billno,collectiondate,patching,qtybalance
+    FROM masterfile2023
+    WHERE collectiondate BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND DATE_ADD(CURDATE(), INTERVAL 3 DAY)
+    AND status like 'process' AND patching > 0 AND qtybalance > 0;";
 
-	// show all result for patching (3 days) into the database
-  $sql = "select billno,dateordered,collectiondate,memberno,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE collectiondate = dateadd(day,14,convert(datetime,$today)";
 
-  $result = $conn->query($sql);
+$result2 = mysqli_query($conn,$sql2);
 
-if ($result->num_rows > 0) {
-      echo "<table id='customers'><tr><th>Bill No</th><th>Date Ordered</th><th>Collection Date</th><th>Member No</th><th>Full Amount</th><th>Deposit</th><th>Balance</th><th>Payment Type</th><th>Simple</th><th>Emboidery</th><th>Manik</th><th>Patching</th><th>Diamond</th><th>Tudung</th><th>Repair</th><th>Quantity</th><th>Cutter</th><th>Sewer</th><th>Beader</th><th>Embpatch</th><th>Status</th></tr>";
-      // output data of each row
-      while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["billno"]."</td><td>".$row["dateordered"]."</td><td>".$row["collectiondate"]."</td><td>".$row["memberno"]."</td><td>".$row["fullamount"]."</td><td>".$row["deposit"]."</td><td>".$row["balance"]."</td><td>".$row["payment"]."</td><td>".$row["simple"]."</td><td>".$row["emboidery"]."</td><td>".$row["manik"]."</td><td>".$row["patching"]."</td><td>".$row["diamond"]."</td><td>".$row["tudung"]."</td><td>".$row["repair"]."</td><td>".$row["qty"]."</td><td>".$row["cutter"]."</td><td>".$row["sewer"]."</td><td>".$row["beader"]."</td><td>".$row["embpatch"]."</td><td>".$row["status"]."</td></tr>";
-      }
-      echo "</table>";
-    } else {
-      echo "0 results";
-    }
+echo "<h1>Patching (3 days)</h1>";
+if (mysqli_num_rows($result2) > 0) {
+// Output data of each row
+while($row = mysqli_fetch_assoc($result2)) {
+echo "<p>Bill number: " . $row["billno"] . " | Collection Date: ". $row["collectiondate"]." | Patching : ".$row["patching"]." | Qty Balance : ".$row["qtybalance"]."</p>";
+}
+} else {
+echo "0 results";
+}
 
+	// show all result for manik (7 days) into the database
+  $sql3 = "SELECT billno,collectiondate,manik,qtybalance
+  FROM masterfile2023
+  WHERE collectiondate BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+  AND status like 'process' AND manik > 0 AND qtybalance > 0;";
+
+
+$result3 = mysqli_query($conn,$sql3);
+
+echo "<h1>Manik (7 days)</h1>";
+if (mysqli_num_rows($result3) > 0) {
+// Output data of each row
+while($row = mysqli_fetch_assoc($result3)) {
+echo "<p>Bill number: " . $row["billno"] . " | Collection Date: ". $row["collectiondate"]." | Manik : ".$row["manik"]." | Qty Balance : ".$row["qtybalance"]."</p>";
+}
+} else {
+echo "0 results";
+}
+  
   
   echo "<br><button><a href='index.html'>Back to main page</a></button>";
 	// close the database connection
 	mysqli_close($conn);
 ?>
+</body>
+</html>

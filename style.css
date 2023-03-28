@@ -21,6 +21,27 @@
   color: white;
 }
 
+h1{
+  color: black;
+  text-align: center;
+}
+
+.logo{
+  width: 400px;
+}
+
+img{
+  width: 25px;
+  vertical-align: top;
+  padding-right: 10px;
+}
+
+
+.button-row{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 button {
   align-items: center;
   background-color: #04AA6D;
@@ -31,7 +52,7 @@ button {
   cursor: pointer;
   display: inline-flex;
   font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   justify-content: center;
   line-height: 20px;
@@ -39,7 +60,7 @@ button {
   min-height: 40px;
   min-width: 0px;
   overflow: hidden;
-  padding: 0px;
+  padding: 20px;
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
@@ -48,11 +69,13 @@ button {
   user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
+  flex-basis: calc(100%/3);
+  margin-bottom: 20px;
 }
 
 button:hover,
 button:focus { 
-  background-color: #16437E;
+  background-color: #e39ff6;
   color: #ffffff;
 }
 
@@ -71,3 +94,185 @@ a{
     text-decoration:none;
     color: inherit;
 }
+
+input[name="submit"]{
+  align-items: center;
+  background-color: pink;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 300px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  touch-action: manipulation;
+  transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+}
+
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: black;
+  background-color: #e3e3e3;
+}
+input,
+input[type="radio"] + label {
+  width: 30%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+input[name="ordertype"]{
+  width: 4%;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+input:focus {
+  outline: 0;
+  border-color: pink;
+}
+input:focus + .input-icon i {
+  color: pink;
+}
+input:focus + .input-icon:after {
+  border-right-color: pink;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label,
+select {
+  margin-top: 10px;
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  border-radius: 0;
+}
+input[type="radio"] + label:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+input[type="radio"] + label:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+input[type="radio"] + label i {
+  padding-right: 0.4em;
+}
+input[type="radio"]:checked + label,
+input:checked + label:before,
+select:focus,
+select:active {
+  background-color: pink;
+  color: #fff;
+  border-color: green;
+  border-width: 3px;
+}
+.input-group {
+  margin-bottom: 1em;
+  zoom: 1;
+}
+.input-group:before,
+.input-group:after {
+  content: "";
+  display: table;
+}
+.input-group:after {
+  clear: both;
+}
+.input-group-icon {
+  position: relative;
+}
+.input-group-icon input {
+  padding-left: 4.4em;
+}
+.input-group-icon .input-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3.4em;
+  height: 3.4em;
+  line-height: 3.4em;
+  text-align: center;
+  pointer-events: none;
+}
+.input-group-icon .input-icon:after {
+  position: absolute;
+  top: 0.6em;
+  bottom: 0.6em;
+  left: 3.4em;
+  display: block;
+  border-right: 1px solid #e5e5e5;
+  content: "";
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.input-group-icon .input-icon i {
+  -webkit-transition: 0.35s ease-in-out;
+  -moz-transition: 0.35s ease-in-out;
+  -o-transition: 0.35s ease-in-out;
+  transition: 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+.container {
+  max-width: 20em;
+  padding: 1em 3em 2em 3em;
+  margin: 0em auto;
+  background-color: #fff;
+  border-radius: 4.2px;
+  box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+}
+.row {
+  zoom: 1;
+}
+.row:before,
+.row:after {
+  content: "";
+  display: table;
+}
+.row:after {
+  clear: both;
+}
+.col-half {
+  padding-right: 10px;
+  float: left;
+  width: 50%;
+}
+.col-half:last-of-type {
+  padding-right: 0;
+}
+.col-third {
+  padding-right: 10px;
+  float: left;
+  width: 33.33333333%;
+}
+.col-third:last-of-type {
+  padding-right: 0;
+}
+

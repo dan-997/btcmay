@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order</title>
+</head>
+<body>
+    <?php 
+      $conn = mysqli_connect("localhost", "root","", "btcmay");
+	
+      // check connection
+      if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+      } 
+
+      $sql = "SELECT max(billno) as max_bill FROM `masterfile2023`;";
+
+      $result = mysqli_query($conn,$sql);
+
+      if (mysqli_num_rows($result) > 0) {
+		// Output data of each row
+		while($row = mysqli_fetch_assoc($result)) {
+			echo "Current Bill Number: " . $row["max_bill"] . "<br>";
+		}
+	} else {
+		echo "0 results";
+	}
+    ?>
+    <h2>New Order</h2>
+    <form action="uploadOrder.php" method="POST">
+        <label for="billno">Bill Number: </label>
+        <input type="text" name="billno" id="billno" required><br><br>
+
+        <label for="dateordered">Date Ordered: </label>
+        <input type="date" name="dateordered" id="dateordered" required><br><br>
+
+        <label for="collectiondate">Collection date: </label>
+        <input type="date" name="collectiondate" id="collectiondate" required><br><br>
+
+        <label for="memberno">Member Number: </label>
+        <input type="text" name="memberno" id="memberno" required><br><br>
+
+        <label for="fullamount">Full Amount: </label>
+        <input type="number" name="fullamount" id="fullamount" required><br><br>
+
+        <label for="deposit">Deposit: </label>
+        <input type="number" name="deposit" id="deposit" required value ="0"><br><br>
+
+        <label for="paymenttype">Payment Type: </label><br>
+        <input type="radio" name="payment" id="online" value="online transfer">
+        <label for="online">Online Transfer</label><br>
+        <input type="radio" name="payment" id="card" value="card payment">
+        <label for="card">Card Payment</label><br>
+        <input type="radio" name="payment" id="cash" value="cash payment">
+        <label for="cash">Cash Payment</label><br><br>
+
+        <label for="ordertype">Order Type: </label><br>
+        <label for="simple">Simple</label> 
+        <input type="number" name="simple" id="simple" required value="0"><br>
+        <label for="emboidery">Emboidery</label>
+        <input type="number" name="emboidery" id="emboidery" required value="0"><br>
+        <label for="manik">Manik </label>
+        <input type="number" name="manik" id="manik" required value="0"><br>
+        <label for="patching">Patching </label>
+        <input type="number" name="patching" id="patching" required value="0"><br>
+        <label for="diamond">Diamond </label>
+        <input type="number" name="diamond" id="diamond" required value="0"><br>
+        <label for="tudung">Tudung </label>
+        <input type="number" name="tudung" id="tudung" required value="0"><br>
+        <label for="repair">Repair </label>
+        <input type="number" name="repair" id="repair" required value="0"><br><br>
+
+       
+        <input type="submit" name="submit" value="Send Order">
+        
+    </form>
+</body>
+</html>

@@ -3,6 +3,7 @@ if (isset($_POST['submit'])) {
 	$billno = $_POST['billno'];
     $deposit = $_POST['depoval'];
     $payment = $_POST['payment'];
+	$current_date = date("Y-m-d");
 
 	// connect to the database
 	$conn = mysqli_connect("localhost", "root","", "btcmay");
@@ -13,7 +14,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-	$sql = "INSERT INTO depositTable (billno, deposit, paymentType) VALUES ('$billno', '$deposit', '$payment');";
+	$sql = "INSERT INTO depositTable (billno, deposit, paymentType, dateEntered) VALUES ('$billno', '$deposit', '$payment','$current_date');";
     $sql .= "UPDATE masterfile2023 SET deposit = ((SELECT deposit FROM masterfile2023 WHERE billno = '$billno') + '$deposit') WHERE billno = '$billno';";
     $sql .= "UPDATE masterfile2023 SET balance = ((SELECT fullamount FROM masterfile2023 WHERE billno = '$billno') - (SELECT deposit FROM masterfile2023 WHERE billno = '$billno')) WHERE billno = '$billno'";
 

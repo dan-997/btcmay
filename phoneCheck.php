@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-    $sql = "select m.billno,m.dateordered,m.collectiondate,m.memberno,m.fullamount,m.deposit,m.balance,m.simple,m.emboidery,m.manik,m.patching,m.diamond,m.tudung,m.repair,m.qty,m.cutter,m.sewer,m.beader,m.embpatch,m.status FROM masterfile2023 m JOIN Customer c ON m.memberno = c.memberno WHERE c.memberphone = $phoneno";
+    $sql = "select m.billno,m.dateordered,m.collectiondate,m.memberno,m.fullamount,m.deposit,m.balance,m.simple,m.emboidery,m.manik,m.patching,m.diamond,m.tudung,m.repair,m.qty,m.done,m.qtybalance,m.cutter,m.sewer,m.beader,m.embpatch,m.status FROM masterfile2023 m JOIN Customer c ON m.memberno = c.memberno WHERE c.memberphone = '$phoneno'";
     $counter = "select count(*) AS total FROM masterfile2023 m JOIN Customer c ON m.memberno = c.memberno WHERE c.memberphone = $phoneno";
 
     $result = $conn->query($sql);

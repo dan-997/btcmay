@@ -9,7 +9,7 @@
 if (isset($_POST['submit'])) {
 	$staffname = $_POST['staffname'];
 	$month = $_POST['month'];
-    $year = $_POST['year'];
+  $year = $_POST['year'];
 
 	// connect to the database
 	$conn = mysqli_connect("localhost", "root","", "btcmay");
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-    $sql = "SELECT billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE embpatch = '$staffname' OR cutter = '$staffname' OR beader = '$staffname'";
+  $sql = "SELECT billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE embpatch = '$staffname' OR cutter = '$staffname' OR beader = '$staffname'";
 	$result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
