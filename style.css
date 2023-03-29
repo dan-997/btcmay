@@ -28,6 +28,7 @@ h1{
 
 .logo{
   width: 400px;
+  margin-top: 10px;
 }
 
 img{
@@ -44,7 +45,7 @@ img{
 
 button {
   align-items: center;
-  background-color: #04AA6D;
+  background-color: rgb(236, 204, 209);
   border: 0;
   border-radius: 100px;
   box-sizing: border-box;
@@ -75,7 +76,7 @@ button {
 
 button:hover,
 button:focus { 
-  background-color: #e39ff6;
+  background-color: #6d9775;
   color: #ffffff;
 }
 
@@ -130,7 +131,8 @@ body {
   background-color: #e3e3e3;
 }
 input,
-input[type="radio"] + label {
+input[type="radio"] + label,select option,
+select {
   width: 30%;
   padding: 1em;
   line-height: 1.4;
@@ -142,6 +144,27 @@ input[type="radio"] + label {
   -o-transition: 0.35s ease-in-out;
   transition: 0.35s ease-in-out;
   transition: all 0.35s ease-in-out;
+}
+
+select {
+  height: 3.4em;
+  line-height: 2;
+}
+select:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+select:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+select:focus,
+select:active {
+  outline: 0;
+}
+select option {
+  background-color: #f0a500;
+  color: #fff;
 }
 
 input[name="ordertype"]{

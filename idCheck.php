@@ -18,15 +18,33 @@ if (isset($_POST['submit'])) {
 
 	// insert data into the database
     $sql = "SELECT billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE memberno = $memberno";
-    $counter = "select count(*) AS total FROM masterfile2023 WHERE memberno = $memberno";
-
+    $counter = "SELECT status, COUNT(*) AS statuscount
+    FROM masterfile2023
+    WHERE memberno = $memberno
+    GROUP BY status ;";
     $result = $conn->query($sql);
     $result2 = $conn->query($counter);
 
+    
+
     if ($result2->num_rows > 0) {
       while($row = $result2->fetch_assoc()) {
-        echo "<h1>".$row["total"]." number of items </h1>";
+        echo "<h1>".$row["status"]." number: ".$row["statuscount"]. "</h1>";
       }
+    }
+
+    $summage = "SELECT SUM(simple) AS ss, SUM(emboidery) AS se, sum(manik) as sm, sum(patching) as sp, sum(diamond) as sd, sum(tudung) as st, sum(repair) as sr 
+    FROM masterfile2023
+    WHERE memberno = $memberno;";
+
+    $result3 = $conn->query($summage);
+    if ($result3->num_rows > 0) {
+      while($row = $result3->fetch_assoc()) {
+        echo "<p> Simple: ".$row["ss"]." | Emboidery: ".$row["se"]." | Manik: ".$row["sm"]." | Patching: ".$row["sp"]." | Diamond: ".$row["sd"]." | Tudung: ".$row["st"]." | Repair: ".$row["sr"]. "</p>";
+      }
+    }
+    else{
+      echo "error";
     }
   
 	if ($result->num_rows > 0) {

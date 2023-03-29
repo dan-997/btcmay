@@ -18,10 +18,10 @@ if (isset($_POST['submit'])) {
 	}
 
 	// insert data into the database
-    $sql = "select billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,done,qtybalance,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE dateordered between '$start' and '$end'";
+    $sql = "select billno,dateordered,collectiondate,memberno,fullamount,deposit,balance,simple,emboidery,manik,patching,diamond,tudung,repair,qty,done,qtybalance,cutter,sewer,beader,embpatch,status FROM masterfile2023 WHERE collectiondate between '$start' and '$end'";
     $counter = "SELECT status, COUNT(*) AS statuscount
     FROM masterfile2023
-    WHERE dateordered between '$start' and '$end'
+    WHERE collectiondate between '$start' and '$end'
     GROUP BY status ;";
     $result = $conn->query($sql);
     $result2 = $conn->query($counter);
@@ -34,21 +34,20 @@ if (isset($_POST['submit'])) {
       }
     }
 
-    $summage = "SELECT SUM(simple) AS ss, SUM(emboidery) AS se, sum(manik) as sm, sum(patching) as sp, sum(diamond) as sd, sum(tudung) as st, sum(repair) as sr, 
-    SUM(simple+emboidery+manik+patching+diamond) as total
+    $summage = "SELECT SUM(simple) AS ss, SUM(emboidery) AS se, sum(manik) as sm, sum(patching) as sp, sum(diamond) as sd, sum(tudung) as st, sum(repair) as sr 
+    ,SUM(simple+emboidery+manik+patching+diamond) as total
     FROM masterfile2023
-    WHERE dateordered between '$start' and '$end';";
+    WHERE collectiondate between '$start' and '$end';";
 
     $result3 = $conn->query($summage);
     if ($result3->num_rows > 0) {
       while($row = $result3->fetch_assoc()) {
-        echo "<p> Simple: ".$row["ss"]." | Emboidery: ".$row["se"]." | Manik: ".$row["sm"]." | Patching: ".$row["sp"]." | Diamond: ".$row["sd"]." | Tudung: ".$row["st"]." | Repair: ".$row["sr"]." | Total (exclude tudung and repair): ".$row["total"] ."</p>";
+        echo "<p> Simple: ".$row["ss"]." | Emboidery: ".$row["se"]." | Manik: ".$row["sm"]." | Patching: ".$row["sp"]." | Diamond: ".$row["sd"]." | Tudung: ".$row["st"]." | Repair: ".$row["sr"] ." | Total (exclude tudung and repair): ".$row["total"] ."</p>";
       }
     }
     else{
       echo "error";
     }
-
   
     if ($result->num_rows > 0) {
       echo "<table id='customers'><tr><th>Bill No</th><th>Date Ordered</th><th>Collection Date</th><th>Member No</th><th>Full Amount</th><th>Deposit</th><th>Balance</th><th>Simple</th><th>Emboidery</th><th>Manik</th><th>Patching</th><th>Diamond</th><th>Tudung</th><th>Repair</th><th>Quantity</th><th>Done</th><th>Quantity Balance</th><th>Cutter</th><th>Sewer</th><th>Beader</th><th>Embpatch</th><th>Status</th></tr>";

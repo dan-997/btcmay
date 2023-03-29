@@ -33,7 +33,7 @@ echo "<h1>Simple (1 days)</h1>";
 if (mysqli_num_rows($result) > 0) {
 // Output data of each row
 while($row = mysqli_fetch_assoc($result)) {
-echo "<p>Simple Due: " . $row["billno"] . " | Collection Date: ". $row["collectiondate"]." | Simple : ".$row["simple"]." | Qty Balance : ".$row["qtybalance"]."</p>";
+echo "<p>Simple Due: " . "<b>".$row["billno"] ."</b>". " | Collection Date: ". $row["collectiondate"]." | Simple : ".$row["simple"]." | Qty Balance : ".$row["qtybalance"]."</p>";
 }
 } else {
 echo "0 results";
@@ -52,7 +52,7 @@ echo "<h1>Patching (3 days)</h1>";
 if (mysqli_num_rows($result2) > 0) {
 // Output data of each row
 while($row = mysqli_fetch_assoc($result2)) {
-echo "<p>Bill number: " . $row["billno"] . " | Collection Date: ". $row["collectiondate"]." | Patching : ".$row["patching"]." | Qty Balance : ".$row["qtybalance"]."</p>";
+echo "<p>Bill number: " ."<b>".$row["billno"] ."</b>" . " | Collection Date: ". $row["collectiondate"]." | Patching : ".$row["patching"]." | Qty Balance : ".$row["qtybalance"]."</p>";
 }
 } else {
 echo "0 results";
@@ -71,7 +71,7 @@ echo "<h1>Manik (7 days)</h1>";
 if (mysqli_num_rows($result3) > 0) {
 // Output data of each row
 while($row = mysqli_fetch_assoc($result3)) {
-echo "<p>Bill number: " . $row["billno"] . " | Collection Date: ". $row["collectiondate"]." | Manik : ".$row["manik"]." | Qty Balance : ".$row["qtybalance"]."</p>";
+echo "<p>Bill number: " ."<b>".$row["billno"] ."</b>". " | Collection Date: ". $row["collectiondate"]." | Manik : ".$row["manik"]." | Qty Balance : ".$row["qtybalance"]."</p>";
 }
 } else {
 echo "0 results";

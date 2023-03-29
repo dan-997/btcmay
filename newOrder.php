@@ -23,7 +23,7 @@
       if (mysqli_num_rows($result) > 0) {
 		// Output data of each row
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "Current Bill Number: " . $row["max_bill"] . "<br>";
+			echo "Current Bill Number: " . "<b>".$row["max_bill"] ."</b>" . "<br>";
 		}
 	} else {
 		echo "0 results";

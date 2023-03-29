@@ -20,7 +20,7 @@
           die("Connection failed: " . mysqli_connect_error());
       } 
 
-      $sql = "SELECT fullamount,deposit,balance FROM `masterfile2023` WHERE billno = $billno;";
+      $sql = "SELECT status,qty,done,qtybalance FROM `masterfile2023` WHERE billno = $billno;";
 
       $result = mysqli_query($conn,$sql);
     
@@ -28,7 +28,7 @@
       if (mysqli_num_rows($result) > 0) {
 		// Output data of each row
 		while($row = mysqli_fetch_assoc($result)) {
-			echo "<b> Full Amount: </b>" . $row["fullamount"] . "<br>"."<b> Deposit:</b> " . $row["deposit"] . "<br>"."<b>Balance: </b>" . $row["balance"] . "<br>";
+			echo "<b> Current Status: </b>" . $row["status"] . "<br>"."<b> Total Quantity:</b> " . $row["qty"] . "<br>"."<b>Quantity Done: </b>" . $row["done"] . "<br><b>Quantity Left: </b>" . $row["qtybalance"] ."<br>";
 		}
 	} else {
 		echo "0 results";
@@ -36,22 +36,17 @@
 }
     ?>
 
-<form action="cashDeposit.php" method="POST">
+<form action="orderStatus.php" method="POST">
 <br><label for="billno">Bill Number: </label><br>
     <input type="text" name="billno" value="<?php echo $billno; ?>"><br>
-    <label for="depoval">Deposit Value: </label><br>
-        <input type="text" name="depoval" id="depoval" required><br><br>
-
-        <label for="paymenttype">Payment Type: </label><br>
-        <input type="radio" name="payment" id="online" value="online transfer">
-        <label for="online">Online Transfer</label><br>
-        <input type="radio" name="payment" id="card" value="card payment">
-        <label for="card">Card Payment</label><br>
-        <input type="radio" name="payment" id="cash" value="cash payment">
-        <label for="cash">Cash Payment</label><br><br>
     
-        <input type="submit" name="submit" value="Cash Deposit">
+    <label for="depoval">Value Completed: </label><br>
+        <input type="text" name="valcomp" id="valcomp" required><br><br>
+
+        <input type="submit" name="submit" value="Update Value">
         
     </form>
 </body>
 </html>
+
+
